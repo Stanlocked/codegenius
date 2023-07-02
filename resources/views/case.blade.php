@@ -61,11 +61,15 @@
                 <img src="/src/icons/inst.svg" alt="" class="footer-menu__img">
             </li>
         </ul>
-        <form action="" class="footer-form">
+        <form action="{{ route('callback.store') }}" class="footer-form" method="POST">
+            @csrf
             <h2 class="footer-form__title">Задать вопрос</h2>
-            <input type="text" class="footer-form__input" placeholder="Сообщение">
-            <input type="text" class="footer-form__input" placeholder="Почта">
-            <button class="footer-form__button"><span class="footer-form__button-text">Отправить</span></button>
+            <input type="text" name="message" class="footer-form__input" placeholder="Сообщение" required>
+            <input type="email" name="email" class="footer-form__input" placeholder="Почта" required>
+            @if (session('success'))
+                <h4>{{ session('success') }}</h4>
+            @endif
+            <button class="footer-form__button" type="submit"><span class="footer-form__button-text">Отправить</span></button>
         </form>
     </div>
 </footer>
